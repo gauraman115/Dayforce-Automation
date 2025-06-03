@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XSLT Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+     <div class="container">
+        <header class="app-header">
+            <div class="logo-container">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Onactate Logo" class="logo">
+            </div>
+            <div class="header-text">
+                <h1>XSLT Generator</h1>
+                <p>Generate XSLT transformations from Excel mappings</p>
+            </div>
+        </header>
+
+        <div class="card">
+            <h2>Configuration</h2>
+            <form id="xsltForm">
+                <div class="form-section">
+                    <h3>Input Fields</h3>
+                    <div class="form-group">
+                        <label for="inputCount">Number of Input Fields:</label>
+                        <input type="number" id="inputCount" name="inputCount" min="1" value="1" required>
+                        <button type="button" id="generateFieldsBtn" class="btn btn-secondary">Generate Fields</button>
+                    </div>
+
+                    <div id="inputFieldsContainer">
+                        <div class="input-field-group">
+                            <div class="input-row">
+                                <div class="input-col">
+                                    <label>Field Name</label>
+                                    <input type="text" name="input_name_0" placeholder="e.g., ProductID" required>
+                                </div>
+                                <div class="input-col">
+                                    <label>Position (Row, Column)</label>
+                                    <input type="text" name="input_pos_0" placeholder="e.g., 1, A" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3>Output Field</h3>
+                    <div class="input-row">
+                        <div class="input-col">
+                            <label for="output_name">Field Name</label>
+                            <input type="text" id="output_name" name="output_name" placeholder="e.g., ProductName" required>
+                        </div>
+                        <div class="input-col">
+                            <label for="output_pos">Position (Row, Column)</label>
+                            <input type="text" id="output_pos" name="output_pos" placeholder="e.g., 1, B" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3>Excel File</h3>
+                    <div class="file-upload">
+                        <label for="excel_file">Upload Excel File:</label>
+                        <div class="upload-area" id="uploadArea">
+                            <span>Drag & drop your file here or</span>
+                            <input type="file" id="excel_file" name="excel_file" accept=".xlsx, .xls" required>
+                            <button type="button" class="btn btn-secondary">Choose File</button>
+                            <div id="fileName">No file chosen</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="actions">
+                    <button type="button" id="generateBtn" class="btn btn-primary">Generate XSLT</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="card output-card">
+            <h2>Generated XSLT</h2>
+            <div id="outputContainer">
+                <pre id="output">Generated XSLT will appear here...</pre>
+            </div>
+            <div class="actions">
+                <button type="button" id="copyBtn" class="btn btn-secondary">Copy to Clipboard</button>
+                <button type="button" id="downloadBtn" class="btn btn-secondary">Download XSLT</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
